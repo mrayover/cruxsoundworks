@@ -6,7 +6,7 @@ const Header = () => {
   {/* Left: Works */}
   <div className="relative group inline-block">
     <span className="hover:opacity-70 font-bold cursor-pointer">Works</span>
-      <div className="absolute top-full left-0 mt-0 pt-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200 bg-dark text-neutral py-2 px-4 rounded shadow-lg z-50 text-sm leading-tight">
+    <div className="absolute top-full left-0 mt-0 pt-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200 bg-dark text-neutral py-2 px-4 rounded shadow-lg z-50 text-sm leading-tight">
       <a href="/works/tarot-tree-of-life" className="block py-1 hover:underline">Tarot Tree of Life</a>
       <a href="/works/to-autumn" className="block py-1 hover:underline">To Autumn</a>
       <a href="/works/unearthing-home" className="block py-1 hover:underline">Unearthing Home</a>
@@ -22,7 +22,7 @@ const Header = () => {
   </div>
 
   {/* Glyph */}
-  <a href="/">
+  <a href="/" className="mx-4">
     <img src="/discretus-glyph.png" alt="Discretus Glyph" className="h-40" />
   </a>
 
