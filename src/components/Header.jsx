@@ -30,7 +30,7 @@ const Header = () => {
   <a href="/lessons" className="hover:opacity-70 font-bold">Lessons</a>
 </header>
 
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
