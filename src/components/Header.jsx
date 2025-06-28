@@ -3,10 +3,10 @@ import React from 'react'
 const Header = () => {
   return (
 <header className="bg-dark text-neutral px-6 py-4 flex items-center justify-center gap-8 text-2xl">
-  {/* Works */}
-  <div className="relative group">
+  {/* Works - nudged left */}
+  <div className="relative group inline-block mr-4">
     <span className="hover:opacity-70 font-bold cursor-pointer">Works</span>
-      <div className="absolute opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200 bg-dark text-neutral mt-2 py-2 px-4 rounded shadow-lg z-50 text-sm leading-tight">
+      <div className="absolute top-full left-0 mt-0 pt-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200 bg-dark text-neutral py-2 px-4 rounded shadow-lg z-50 text-sm leading-tight">
       <a href="/works/tarot-tree-of-life" className="block py-1 hover:underline">Tarot Tree of Life</a>
       <a href="/works/to-autumn" className="block py-1 hover:underline">To Autumn</a>
       <a href="/works/unearthing-home" className="block py-1 hover:underline">Unearthing Home</a>
@@ -26,8 +26,8 @@ const Header = () => {
     <img src="/discretus-glyph.png" alt="Discretus Glyph" className="h-40" />
   </a>
 
-  {/* Lessons */}
-  <a href="/lessons" className="hover:opacity-70 font-bold">Lessons</a>
+  {/* Lessons - nudged right */}
+  <a href="/lessons" className="hover:opacity-70 font-bold ml-4">Lessons</a>
 </header>
 
   )
