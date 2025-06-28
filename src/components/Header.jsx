@@ -2,9 +2,9 @@ import React from 'react'
 
 const Header = () => {
   return (
-<header className="bg-dark text-neutral px-6 py-4 flex items-center justify-center gap-8 text-2xl">
-  {/* Works - nudged left */}
-  <div className="relative group inline-block mr-4">
+<header className="bg-dark text-neutral px-6 py-4 flex justify-between items-center text-2xl max-w-4xl mx-auto">
+  {/* Left: Works */}
+  <div className="relative group inline-block">
     <span className="hover:opacity-70 font-bold cursor-pointer">Works</span>
       <div className="absolute top-full left-0 mt-0 pt-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200 bg-dark text-neutral py-2 px-4 rounded shadow-lg z-50 text-sm leading-tight">
       <a href="/works/tarot-tree-of-life" className="block py-1 hover:underline">Tarot Tree of Life</a>
@@ -26,8 +26,8 @@ const Header = () => {
     <img src="/discretus-glyph.png" alt="Discretus Glyph" className="h-40" />
   </a>
 
-  {/* Lessons - nudged right */}
-  <a href="/lessons" className="hover:opacity-70 font-bold ml-4">Lessons</a>
+  {/* Right: Lessons */}
+  <a href="/lessons" className="hover:opacity-70 font-bold">Lessons</a>
 </header>
 
   )
