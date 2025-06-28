@@ -8,11 +8,11 @@ const Header = () => {
     <a href="/">
       <img src="/discretus-glyph.png" alt="Discretus Glyph" className="h-40" />
     </a>
-    <a href="/" className="text-base font-semibold hover:underline">Home</a>
+    <a href="/" className="text-xl font-semibold hover:underline">Home</a>
   </div>
 
-  {/* Center: Works + Lessons (evenly spaced middle group) */}
-  <div className="flex gap-16 items-center">
+  {/* Center: Works + Lessons */}
+  <div className="flex gap-24 items-center text-2xl">
     <div className="relative group">
       <span className="hover:opacity-70 font-bold cursor-pointer">Works</span>
       <div className="absolute opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200 bg-dark text-neutral mt-2 py-2 px-4 rounded shadow-lg z-50">
@@ -29,12 +29,11 @@ const Header = () => {
         <a href="/works" className="block py-1 mt-2 pt-2 border-t border-neutral/30 hover:underline">All Works</a>
       </div>
     </div>
-
     <a href="/lessons" className="hover:opacity-70 font-bold">Lessons</a>
   </div>
 
   {/* Right: Contact */}
-  <div>
+  <div className="text-2xl">
     <a href="/contact" className="hover:opacity-70 font-bold">Contact</a>
   </div>
 </header>
