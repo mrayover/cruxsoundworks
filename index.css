@@ -1,0 +1,17 @@
+/* index.css - Global styles */
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background-color: #ffffff;
+  color: #111;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
