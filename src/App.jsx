@@ -6,7 +6,7 @@ function App() {
     <Layout>
       <div className="text-center py-8">
         <h1 className="text-4xl font-bold">Welcome to Crux Soundworks</h1>
-        <p className="text-lg mt-2">Artistic. Refined. Tower District Soul.</p>
+        <p className="text-lg mt-2 italic">The Pattern Beneath the Noise</p>
       </div>
     </Layout>
   )

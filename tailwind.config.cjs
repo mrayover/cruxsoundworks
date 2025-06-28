@@ -11,7 +11,7 @@ module.exports = {
         dark: "#2f2f2f"
       },
       fontFamily: {
-        serif: ["Georgia", "serif"]
+        serif: ['"EB Garamond"', 'Georgia', 'serif']
       }
     },
   },

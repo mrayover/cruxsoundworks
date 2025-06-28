@@ -5,7 +5,6 @@ const Header = () => {
     <header className="bg-dark text-neutral p-4 flex flex-col sm:flex-row items-center justify-between">
       <div className="flex items-center space-x-2">
         <img src="/discretus-glyph.png" alt="Discretus Glyph" className="h-10" />
-        <img src="/crux-logo.png" alt="Crux Soundworks Logo" className="h-6" />
       </div>
       <nav className="flex space-x-4 mt-2 sm:mt-0">
         <a href="/" className="hover:opacity-70 font-bold">Home</a>
