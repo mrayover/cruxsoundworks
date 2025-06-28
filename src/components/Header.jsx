@@ -6,7 +6,7 @@ const Header = () => {
   {/* Left: Glyph + Home */}
   <div className="flex flex-col items-start">
     <a href="/" className="block">
-      <img src="/discretus-glyph.png" alt="Discretus Glyph" className="h-28" />
+      <img src="/discretus-glyph.png" alt="Discretus Glyph" className="h-40" />
     </a>
     <a href="/" className="mt-1 text-sm font-semibold hover:underline">Home</a>
   </div>
