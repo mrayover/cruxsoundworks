@@ -6,7 +6,7 @@ const Header = () => {
   {/* Works */}
   <div className="relative group">
     <span className="hover:opacity-70 font-bold cursor-pointer">Works</span>
-    <div className="absolute opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200 bg-dark text-neutral mt-2 py-2 px-4 rounded shadow-lg z-50">
+      <div className="absolute opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200 bg-dark text-neutral mt-2 py-2 px-4 rounded shadow-lg z-50 text-sm leading-tight">
       <a href="/works/tarot-tree-of-life" className="block py-1 hover:underline">Tarot Tree of Life</a>
       <a href="/works/to-autumn" className="block py-1 hover:underline">To Autumn</a>
       <a href="/works/unearthing-home" className="block py-1 hover:underline">Unearthing Home</a>
