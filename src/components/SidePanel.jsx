@@ -21,7 +21,8 @@ const SidePanel = ({ type, onClose }) => {
       </div>
       {type === 'works' ? (
         <>
-          <p className="text-xs mb-4">Click to view the full index</p>
+          <a href="/works" className="text-xs mb-4 underline hover:opacity-80 block">
+            Click to view the full index</a>
           <a href="/works/tarot-tree-of-life" className="block py-1 hover:underline">Tarot Tree of Life - Flex Ensemble</a>
           <a href="/works/to-autumn" className="block py-1 hover:underline">To Autumn - Pierrot Ensemble</a>
           <a href="/works/unearthing-home" className="block py-1 hover:underline">Unearthing Home - Piano & Voice</a>
