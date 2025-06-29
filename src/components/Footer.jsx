@@ -3,7 +3,7 @@ import React from 'react';
 export default function Footer() {
   return (
       <footer className="bg-dark text-neutral text-center py-6 text-lg">
-        <div className="mb-2 flex justify-between max-w-sm mx-auto px-4">
+        <div className="mb-2 flex justify-between max-w-sm mx-auto px-2">
           <a href="/contact" className="hover:underline font-semibold">Contact</a>
           <a href="/about" className="hover:underline font-semibold">About</a>
         </div>
