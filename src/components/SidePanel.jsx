@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SidePanel = ({ type }) => {
+const SidePanel = ({ type, onClose }) => {
   const isLeft = type === 'works';
   return (
     <div
@@ -8,7 +8,17 @@ const SidePanel = ({ type }) => {
         isLeft ? 'animate-slide-in-left' : 'animate-slide-in-right'
       }`}
     >
-      <h2 className="text-2xl font-bold mb-6">{type === 'works' ? 'Explore Works' : 'Lessons Info'}</h2>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold">
+          {type === 'works' ? 'Explore Works' : 'Lessons Info'}
+        </h2>
+        <button
+          onClick={onClose}
+          className="text-sm font-bold hover:underline text-neutral"
+        >
+          Close
+        </button>
+      </div>
       {type === 'works' ? (
         <>
           <p className="text-xs mb-4">Click to view the full index</p>
