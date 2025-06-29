@@ -8,7 +8,9 @@ const Home = () => {
       src="/crux-logo.png"
       alt="Crux Soundworks Logo"
       className="h-36 drop-shadow-xl"/>
-      <h2 className="mt-20 text-2xl italic text-neutral/80">The Pattern Beneath the Noise</h2>
+      <p className="mt-4 text-xl italic text-neutral/70">
+          The Pattern Beneath the Noise
+      </p>
     </div>
   );
 };
