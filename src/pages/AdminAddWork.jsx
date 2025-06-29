@@ -19,18 +19,30 @@ const AdminAddWork = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = { ...formData };
-    data.year = parseInt(data.year);
-    data.pastPerformances = data.pastPerformances.split('\n').filter(Boolean);
-    try {
-      await addDoc(collection(db, 'works'), data);
-      alert('Work added!');
-    } catch (err) {
-      console.error('Error adding document:', err);
-    }
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const data = { ...formData };
+  data.year = parseInt(data.year);
+  data.pastPerformances = data.pastPerformances.split('\n').filter(Boolean);
+  try {
+    await addDoc(collection(db, 'works'), data);
+    alert('Work added!');
+    // reset form
+    setFormData({
+      title: '',
+      instrumentation: '',
+      year: '',
+      description: '',
+      imageURL: '',
+      audioURL: '',
+      scoreLink: '',
+      pastPerformances: '',
+    });
+  } catch (err) {
+    console.error('Error adding document:', err);
+    alert('Failed to submit. Check console.');
+  }
+};
 
   return (
     <div className="max-w-2xl mx-auto py-12 px-4">
