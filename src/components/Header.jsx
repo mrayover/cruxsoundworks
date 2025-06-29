@@ -3,7 +3,7 @@ import React from 'react'
 const Header = () => {
   return (
 <header className="bg-dark text-neutral px-6 py-4 flex justify-between items-center text-2xl max-w-4xl mx-auto">
-  /* Left: Works */
+  {/* Left: Works */}
   <div className="relative group inline-block">
     <span className="hover:opacity-70 font-bold cursor-pointer">Works</span>
     <div className="absolute top-full left-0 mt-0 pt-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200 bg-dark text-neutral py-2 px-4 rounded shadow-lg z-50 text-sm leading-tight">
@@ -21,12 +21,12 @@ const Header = () => {
     </div>
   </div>
 
-  /* Glyph */
+  {/* Glyph */}
   <a href="/" className="mx-4">
     <img src="/discretus-glyph.png" alt="Discretus Glyph" className="h-40" />
   </a>
 
-  /* Right: Lessons */
+  {/* Right: Lessons */}
   <a href="/lessons" className="hover:opacity-70 font-bold">Lessons</a>
 </header>
 
