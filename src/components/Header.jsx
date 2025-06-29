@@ -9,6 +9,16 @@ const Header = () => {
         <div className="absolute right-full top-0 mr-4 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200 bg-dark text-neutral p-4 rounded shadow-lg z-50 text-sm w-48">
           <p className="font-semibold mb-2">Explore Works</p>
           <p className="text-xs">Click to view the full index</p>
+                  <a href="/works/tarot-tree-of-life" className="block py-1 hover:underline">Tarot Tree of Life</a>
+          <a href="/works/to-autumn" className="block py-1 hover:underline">To Autumn</a>
+          <a href="/works/unearthing-home" className="block py-1 hover:underline">Unearthing Home</a>
+          <a href="/works/counting-seconds" className="block py-1 hover:underline">Counting Seconds</a>
+          <a href="/works/corrida" className="block py-1 hover:underline">Corrida</a>
+          <a href="/works/grafan-imago" className="block py-1 hover:underline">Grafan Imago</a>
+          <a href="/works/string-quartet" className="block py-1 hover:underline">String Quartet</a>
+          <a href="/works/discretus-discernere" className="block py-1 hover:underline">Discretus & Discernere</a>
+          <a href="/works/seven-against-thebes" className="block py-1 hover:underline">Seven Against Thebes</a>
+          <a href="/works/counting-down" className="block py-1 hover:underline">Counting Down</a>
         </div>
       </div>
 
