@@ -4,10 +4,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import App from './App'
 import './index.css'
 import Layout from './components/Layout'
-import WorksIndex from './pages/works/WorksIndex'
-import TarotTreeOfLife from './pages/works/TarotTreeOfLife'
-import ToAutumn from './pages/works/ToAutumn'
-import UnearthingHome from './pages/works/UnearthingHome'
+import WorksIndex from './pages/WorksIndex';
+import WorkDetail from './pages/WorkDetail';
+import AdminAddWork from './pages/AdminAddWork';
 // ...import other works as needed
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -17,9 +16,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/works" element={<WorksIndex />} />
-          <Route path="/works/tarot-tree-of-life" element={<TarotTreeOfLife />} />
-          <Route path="/works/to-autumn" element={<ToAutumn />} />
-          <Route path="/works/unearthing-home" element={<UnearthingHome />} />
+          <Route path="/works/:slug" element={<WorkDetail />} />
+          <Route path="/admin/add-work" element={<AdminAddWork />} />
           {/* Add other works here */}
         </Routes>
       </Layout>
