@@ -11,8 +11,8 @@ const Home = () => {
 
     <div className="h-10" />
 
-      <p className="text-xl italic text-white mt-12">
-        The Pattern Beneath the Noise
+      <p className="text-xl italic text-white mt-12 bg-black/40 px-4 py-2 rounded">
+          The Pattern Beneath the Noise
       </p>
     </div>
   );
