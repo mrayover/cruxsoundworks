@@ -24,10 +24,10 @@ const WorkDetail = () => {
   return (
     <section className="px-6 md:px-12 py-12 max-w-5xl mx-auto">
       {work.imageURL && (
-        <img
+      <img
           src={work.imageURL}
           alt={`${work.title} cover`}
-          className="w-full max-h-[400px] object-cover mb-6 rounded-xl"
+          className="w-full h-auto max-w-3xl mx-auto mb-6 rounded-xl shadow"
         />
       )}
 
