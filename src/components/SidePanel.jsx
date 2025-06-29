@@ -22,18 +22,18 @@ const SidePanel = ({ type, onClose }) => {
       {type === 'works' ? (
         <>
           <p className="text-xs mb-4">Click to view the full index</p>
-          <a href="/works/tarot-tree-of-life" className="block py-1 hover:underline">Tarot Tree of Life</a>
-          <a href="/works/to-autumn" className="block py-1 hover:underline">To Autumn</a>
-          <a href="/works/unearthing-home" className="block py-1 hover:underline">Unearthing Home</a>
-          <a href="/works/counting-seconds" className="block py-1 hover:underline">Counting Seconds</a>
-          <a href="/works/corrida" className="block py-1 hover:underline">Corrida</a>
-          <a href="/works/grafan-imago" className="block py-1 hover:underline">Grafan Imago</a>
+          <a href="/works/tarot-tree-of-life" className="block py-1 hover:underline">Tarot Tree of Life - Flex Ensemble</a>
+          <a href="/works/to-autumn" className="block py-1 hover:underline">To Autumn - Pierrot Ensemble</a>
+          <a href="/works/unearthing-home" className="block py-1 hover:underline">Unearthing Home - Piano & Voice</a>
+          <a href="/works/counting-seconds" className="block py-1 hover:underline">Counting Seconds - Piano</a>
+          <a href="/works/corrida" className="block py-1 hover:underline">Corrida - Piano</a>
+          <a href="/works/grafan-imago" className="block py-1 hover:underline">Grafan Imago - Saxophone Quartet</a>
           <a href="/works/string-quartet" className="block py-1 hover:underline">String Quartet</a>
-          <a href="/works/discretus-discernere" className="block py-1 hover:underline">Discretus & Discernere</a>
-          <a href="/works/seven-against-thebes" className="block py-1 hover:underline">Seven Against Thebes</a>
-          <a href="/works/counting-down" className="block py-1 hover:underline">Counting Down</a>
-          <a href="/works" className="block py-1 mt-2 pt-2 border-t border-neutral/30 hover:underline">All Works</a>
-        </>
+          <a href="/works/discretus-discernere" className="block py-1 hover:underline">Discretus & Discernere - String Quartet + Classical Guitar</a>
+          <a href="/works/seven-against-thebes" className="block py-1 hover:underline">Seven Against Thebes - Wind Quintet</a>
+          <a href="/works/counting-down" className="block py-1 hover:underline">Counting Down - Guitar Trio</a>
+          <a href="/works/Guitar + Cello Suite" className="block py-1 hover:underline">Guitar + Cello Suite</a>
+            </>
       ) : (
         <div className="text-sm leading-snug space-y-2">
           <p>Offering private lessons in guitar, composition, and music theory.</p>
