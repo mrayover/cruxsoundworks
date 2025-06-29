@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 const WorkDetail = () => {
   const { slug } = useParams();
@@ -36,9 +38,12 @@ const WorkDetail = () => {
         <p className="text-sm tracking-widest uppercase text-gray-500 mb-4">
           {work.instrumentation} · {work.year}
         </p>
-        <p className="text-base md:text-lg text-gray-800 leading-relaxed mb-6">
+        <ReactMarkdown
+          className="prose prose-lg text-gray-800 mb-6"
+          rehypePlugins={[rehypeRaw]}
+        >
           {work.description}
-        </p>
+        </ReactMarkdown>
 
         {work.audioURL && (
           <div className="mb-6">
