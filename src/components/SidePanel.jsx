@@ -4,7 +4,7 @@ const SidePanel = ({ type }) => {
   const isLeft = type === 'works';
   return (
     <div
-className={`fixed top-0 ${isLeft ? 'left-0' : 'right-0'} h-full w-1/2 bg-dark text-neutral p-8 z-40 transition duration-300 ease-in-out`}
+      className={\`fixed top-0 \${isLeft ? 'left-0' : 'right-0'} h-full w-1/3 bg-dark text-neutral p-8 z-40 pt-6 transform transition-transform duration-300 ease-in-out \${isLeft ? 'animate-slide-in-left' : 'animate-slide-in-right'}\`}
     >
       <h2 className="text-2xl font-bold mb-6">{type === 'works' ? 'Explore Works' : 'Lessons Info'}</h2>
       {type === 'works' ? (
@@ -20,6 +20,7 @@ className={`fixed top-0 ${isLeft ? 'left-0' : 'right-0'} h-full w-1/2 bg-dark te
           <a href="/works/discretus-discernere" className="block py-1 hover:underline">Discretus & Discernere</a>
           <a href="/works/seven-against-thebes" className="block py-1 hover:underline">Seven Against Thebes</a>
           <a href="/works/counting-down" className="block py-1 hover:underline">Counting Down</a>
+          <a href="/works" className="block py-1 mt-2 pt-2 border-t border-neutral/30 hover:underline">All Works</a>
         </>
       ) : (
         <div className="text-sm leading-snug space-y-2">
