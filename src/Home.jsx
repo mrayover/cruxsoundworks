@@ -9,7 +9,7 @@ const Home = () => {
       alt="Crux Soundworks Logo"
       className="h-36 drop-shadow-xl"/>
 
-    <div className="h-5" />
+    <div className="h-0" />
 
       <p className="text-xl italic text-neutral/70">
         The Pattern Beneath the Noise
