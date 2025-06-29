@@ -4,7 +4,9 @@ const SidePanel = ({ type }) => {
   const isLeft = type === 'works';
   return (
     <div
-      className={\`fixed top-0 \${isLeft ? 'left-0' : 'right-0'} h-full w-1/3 bg-dark text-neutral p-8 z-40 pt-6 transform transition-transform duration-300 ease-in-out \${isLeft ? 'animate-slide-in-left' : 'animate-slide-in-right'}\`}
+      className={`fixed top-0 ${isLeft ? 'left-0' : 'right-0'} h-full w-1/3 bg-dark text-neutral p-8 z-40 pt-6 transform transition-transform duration-300 ease-in-out ${
+        isLeft ? 'animate-slide-in-left' : 'animate-slide-in-right'
+      }`}
     >
       <h2 className="text-2xl font-bold mb-6">{type === 'works' ? 'Explore Works' : 'Lessons Info'}</h2>
       {type === 'works' ? (
