@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import EditWorkModal from '../../components/EditWorkModal';
 import { doc, updateDoc } from 'firebase/firestore';
 import AddWorkModal from '../../components/AddWorkModal';
+import { deleteDoc, doc } from 'firebase/firestore';
 
 export default function ComposerDashboard() {
   const [works, setWorks] = useState([]);
@@ -41,6 +42,21 @@ export default function ComposerDashboard() {
     setSelectedWork(work);
     setIsModalOpen(true);
   };
+
+  const handleDelete = async (work) => {
+  const confirmed = window.confirm(`Delete "${work.title}"? This cannot be undone.`);
+  if (!confirmed) return;
+
+  try {
+    await deleteDoc(doc(db, 'works', work.id));
+    setWorks((prev) => prev.filter((w) => w.id !== work.id));
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2500);
+  } catch (err) {
+    console.error('Error deleting work:', err);
+    alert('Failed to delete work.');
+  }
+};
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -110,12 +126,20 @@ const handleSave = async (updatedWork) => {
           {work.duration && (
             <p className="text-sm text-gray-500 italic">Duration: {work.duration}</p>
           )}
-          <button
-            onClick={() => handleEdit(work)}
-            className="mt-2 text-blue-600 underline"
-          >
-            Edit
-          </button>
+      <div className="mt-2 flex gap-4">
+        <button
+          onClick={() => handleEdit(work)}
+          className="text-blue-600 underline"
+        >
+          Edit
+        </button>
+        <button
+          onClick={() => handleDelete(work)}
+          className="text-red-600 underline"
+        >
+          Delete
+        </button>
+      </div>
         </div>
       ))}
     </div>
