@@ -6,6 +6,8 @@ import { signOut } from 'firebase/auth';
 import { auth, db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import EditWorkModal from '../../components/EditWorkModal';
+import { doc, updateDoc } from 'firebase/firestore';
+
 
 export default function ComposerDashboard() {
   const [works, setWorks] = useState([]);
@@ -22,6 +24,8 @@ export default function ComposerDashboard() {
     fetchWorks();
   }, []);
 
+  const [showToast, setShowToast] = useState(false);
+
   const handleLogout = async () => {
     await signOut(auth);
     navigate('/admin/composer/login');
@@ -37,11 +41,37 @@ export default function ComposerDashboard() {
     setSelectedWork(null);
   };
 
-  const handleSave = (updatedWork) => {
-    // Placeholder — Phase 2B will save to Firestore
-    console.log('Save this work to Firestore:', updatedWork);
-    handleCloseModal();
+const handleSave = async (updatedWork) => {
+  if (!updatedWork.id) return;
+
+  const slug = updatedWork.title
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w-]/g, '');
+
+  const workRef = doc(db, 'works', updatedWork.id);
+  const updatedData = {
+    ...updatedWork,
+    slug,
   };
+
+  try {
+    await updateDoc(workRef, updatedData);
+
+    // Refresh local list
+    setWorks((prev) =>
+      prev.map((w) => (w.id === updatedWork.id ? updatedData : w))
+    );
+
+    handleCloseModal();
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2500); 
+  } catch (err) {
+    console.error('Error updating Firestore:', err);
+    alert('Error saving changes.');
+  }
+};
+
 
   return (
     <div className="max-w-4xl mx-auto py-10 px-4">
