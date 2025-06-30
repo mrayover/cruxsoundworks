@@ -58,7 +58,6 @@ const handleSave = async (updatedWork) => {
   const workRef = doc(db, 'works', updatedWork.id);
   const updatedData = {
     ...updatedWork,
-    duration,
     slug,
   };
 
@@ -102,7 +101,6 @@ const handleSave = async (updatedWork) => {
         </button>
       </div>
     </div>
-
     {/* List of Works */}
     <div className="grid gap-4">
       {works.map((work) => (
