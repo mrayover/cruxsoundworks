@@ -5,6 +5,7 @@ import { db } from '../firebase';
 export default function AddWorkModal({ isOpen, onClose, onAdd }) {
   const [title, setTitle] = useState('');
   const [instrumentation, setInstrumentation] = useState('');
+  const [duration, setDuration] = useState('');
   const [description, setDescription] = useState('');
   const [imageURL, setImageURL] = useState('');
   const [audioURL, setAudioURL] = useState('');
@@ -12,7 +13,7 @@ export default function AddWorkModal({ isOpen, onClose, onAdd }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const slug = title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
-    const newWork = { title, instrumentation, description, imageURL, audioURL, slug };
+    const newWork = { title, instrumentation, duration, description, imageURL, audioURL, slug };
 
     try {
       const docRef = await addDoc(collection(db, 'works'), newWork);
@@ -46,6 +47,13 @@ export default function AddWorkModal({ isOpen, onClose, onAdd }) {
             onChange={(e) => setInstrumentation(e.target.value)}
             placeholder="Instrumentation"
           />
+        <input
+            className="w-full p-2 border rounded"
+            type="text"
+            value={duration}
+            onChange={(e) => setDuration(e.target.value)}
+            placeholder="Duration (e.g. 5:30)"
+        />
           <textarea
             className="w-full p-2 border rounded"
             value={description}
