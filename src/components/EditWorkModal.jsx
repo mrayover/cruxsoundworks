@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 export default function EditWorkModal({ work, isOpen, onClose, onSave }) {
   const [title, setTitle] = useState('');
   const [instrumentation, setInstrumentation] = useState('');
+  const [duration, setDuration] = useState('');
   const [description, setDescription] = useState('');
   const [imageURL, setImageURL] = useState('');
   const [audioURL, setAudioURL] = useState('');
@@ -11,6 +12,7 @@ export default function EditWorkModal({ work, isOpen, onClose, onSave }) {
     if (work) {
       setTitle(work.title || '');
       setInstrumentation(work.instrumentation || '');
+      setDuration(work.duration || '');
       setDescription(work.description || '');
       setImageURL(work.imageURL || '');
       setAudioURL(work.audioURL || '');
@@ -23,6 +25,7 @@ export default function EditWorkModal({ work, isOpen, onClose, onSave }) {
       ...work,
       title,
       instrumentation,
+      duration,
       description,
       imageURL,
       audioURL,
@@ -53,6 +56,17 @@ export default function EditWorkModal({ work, isOpen, onClose, onSave }) {
               type="text"
               value={instrumentation}
               onChange={(e) => setInstrumentation(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold mb-1">Duration</label>
+            <input
+              className="w-full p-2 border rounded"
+              type="text"
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
+              placeholder="Duration (e.g. 7:30)"
             />
           </div>
 
