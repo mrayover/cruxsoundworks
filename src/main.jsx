@@ -12,6 +12,8 @@ import Login from './pages/admin/Login'
 import ComposerDashboard from './pages/admin/ComposerDashboard'
 import ProtectedRoute from './components/ProtectedRoute'
 import { AuthProvider } from './context/AuthContext';
+import AdminIndex from './pages/admin/AdminIndex';
+
 // ...import other works as needed
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -24,7 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="/works" element={<WorksIndex />} />
             <Route path="/works/:slug" element={<WorkDetail />} />
             <Route path="/admin/add-work" element={<AdminAddWork />} />
-
+            <Route path="/admin" element={<AdminIndex />} />
             {/* 🔐 Admin Composer Routes */}
             <Route path="/admin/composer/login" element={<Login />} />
             <Route
