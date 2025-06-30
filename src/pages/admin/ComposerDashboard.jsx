@@ -58,6 +58,7 @@ const handleSave = async (updatedWork) => {
   const workRef = doc(db, 'works', updatedWork.id);
   const updatedData = {
     ...updatedWork,
+    duration,
     slug,
   };
 
