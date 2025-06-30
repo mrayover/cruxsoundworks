@@ -36,9 +36,11 @@ const WorkDetail = () => {
 
       <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-sm">
         <h2 className="text-3xl md:text-5xl font-serif font-semibold mb-2">{work.title}</h2>
-        <p className="text-sm tracking-widest uppercase text-gray-500 mb-4">
-          {work.instrumentation} · {work.year}
-        </p>
+          <p className="uppercase tracking-wide text-sm text-gray-500 font-medium">
+            {work.instrumentation}
+            {work.duration && <> · {work.duration}</>}
+            {work.year && <> · {work.year}</>}
+          </p>
         <ReactMarkdown
           className="prose prose-lg text-gray-800 mb-6"
           rehypePlugins={[rehypeRaw]}
