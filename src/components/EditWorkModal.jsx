@@ -7,6 +7,7 @@ export default function EditWorkModal({ work, isOpen, onClose, onSave }) {
   const [description, setDescription] = useState('');
   const [imageURL, setImageURL] = useState('');
   const [audioURL, setAudioURL] = useState('');
+  const [published, setPublished] = useState(false);
 
   useEffect(() => {
     if (work) {
@@ -16,6 +17,7 @@ export default function EditWorkModal({ work, isOpen, onClose, onSave }) {
       setDescription(work.description || '');
       setImageURL(work.imageURL || '');
       setAudioURL(work.audioURL || '');
+      setPublished(work.published ?? false);
     }
   }, [work]);
 
@@ -29,6 +31,7 @@ export default function EditWorkModal({ work, isOpen, onClose, onSave }) {
       description,
       imageURL,
       audioURL,
+      published,
     });
   };
 
@@ -98,6 +101,17 @@ export default function EditWorkModal({ work, isOpen, onClose, onSave }) {
               value={audioURL}
               onChange={(e) => setAudioURL(e.target.value)}
             />
+          </div>
+          <div className="flex items-center space-x-2">
+        <input
+          type="checkbox"
+          id="published"
+          checked={published}
+          onChange={(e) => setPublished(e.target.checked)}
+        />
+        <label htmlFor="published" className="text-sm font-medium">
+          Published
+        </label>
           </div>
 
           <div className="flex justify-end gap-2">

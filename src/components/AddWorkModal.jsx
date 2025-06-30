@@ -9,11 +9,12 @@ export default function AddWorkModal({ isOpen, onClose, onAdd }) {
   const [description, setDescription] = useState('');
   const [imageURL, setImageURL] = useState('');
   const [audioURL, setAudioURL] = useState('');
+  const [published, setPublished] = useState(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const slug = title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
-    const newWork = { title, instrumentation, duration, description, imageURL, audioURL, slug };
+    const newWork = { title, instrumentation, duration, description, imageURL, audioURL, slug, published  };
 
     try {
       const docRef = await addDoc(collection(db, 'works'), newWork);
@@ -75,6 +76,17 @@ export default function AddWorkModal({ isOpen, onClose, onAdd }) {
             onChange={(e) => setAudioURL(e.target.value)}
             placeholder="Audio URL"
           />
+          <div className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            id="published"
+            checked={published}
+            onChange={(e) => setPublished(e.target.checked)}
+          />
+          <label htmlFor="published" className="text-sm font-medium">
+            Published
+          </label>
+        </div>
           <div className="flex justify-end gap-2">
             <button type="button" onClick={onClose} className="bg-gray-300 px-4 py-2 rounded">
               Cancel
