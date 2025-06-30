@@ -7,7 +7,7 @@ import { auth, db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import EditWorkModal from '../../components/EditWorkModal';
 import { doc, updateDoc } from 'firebase/firestore';
-
+import AddWorkModal from '../../components/AddWorkModal';
 
 export default function ComposerDashboard() {
   const [works, setWorks] = useState([]);
@@ -23,6 +23,12 @@ export default function ComposerDashboard() {
     };
     fetchWorks();
   }, []);
+
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
+  const handleAddWork = (newWork) => {
+  setWorks((prev) => [...prev, newWork]);
+};
 
   const [showToast, setShowToast] = useState(false);
 
@@ -87,6 +93,24 @@ const handleSave = async (updatedWork) => {
         </button>
       </div>
 
+<div className="flex justify-between items-center mb-6">
+  <h1 className="text-3xl font-serif">Composer Admin Panel</h1>
+  <div className="flex gap-2">
+    <button
+      onClick={() => setIsAddModalOpen(true)}
+      className="text-sm bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700"
+    >
+      + New Work
+    </button>
+    <button
+      onClick={handleLogout}
+      className="text-sm bg-gray-800 text-white px-3 py-1 rounded hover:bg-gray-600"
+    >
+      Log Out
+    </button>
+  </div>
+</div>
+
       <div className="grid gap-4">
         {works.map(work => (
           <div key={work.id} className="p-4 border rounded bg-gray-50">
@@ -113,6 +137,11 @@ const handleSave = async (updatedWork) => {
         ✅ Changes saved!
       </div>
     )}
+        <AddWorkModal
+      isOpen={isAddModalOpen}
+      onClose={() => setIsAddModalOpen(false)}
+      onAdd={handleAddWork}
+        />
     </div>
   );
 }
