@@ -1,14 +1,12 @@
 // Full replacement for src/pages/admin/ComposerDashboard.jsx
 
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import { auth, db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import EditWorkModal from '../../components/EditWorkModal';
-import { doc, updateDoc } from 'firebase/firestore';
 import AddWorkModal from '../../components/AddWorkModal';
-import { deleteDoc, doc } from 'firebase/firestore';
 
 export default function ComposerDashboard() {
   const [works, setWorks] = useState([]);
@@ -126,20 +124,20 @@ const handleSave = async (updatedWork) => {
           {work.duration && (
             <p className="text-sm text-gray-500 italic">Duration: {work.duration}</p>
           )}
-      <div className="mt-2 flex gap-4">
-        <button
-          onClick={() => handleEdit(work)}
-          className="text-blue-600 underline"
-        >
-          Edit
-        </button>
-        <button
-          onClick={() => handleDelete(work)}
-          className="text-red-600 underline"
-        >
-          Delete
-        </button>
-      </div>
+          <div className="mt-2 flex gap-4">
+            <button
+              onClick={() => handleEdit(work)}
+              className="text-blue-600 underline"
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => handleDelete(work)}
+              className="text-red-600 underline"
+            >
+              Delete
+            </button>
+          </div>
         </div>
       ))}
     </div>
