@@ -106,6 +106,11 @@ const handleSave = async (updatedWork) => {
         onClose={handleCloseModal}
         onSave={handleSave}
       />
+          {showToast && (
+      <div className="fixed bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded shadow-lg z-50 transition-opacity duration-300">
+        ✅ Changes saved!
+      </div>
+    )}
     </div>
   );
 }
