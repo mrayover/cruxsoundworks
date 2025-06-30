@@ -1,7 +1,26 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import { db } from '../firebase';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 
 const SidePanel = ({ type, onClose }) => {
   const isLeft = type === 'works';
+  const [works, setWorks] = useState([]);
+
+useEffect(() => {
+  if (type === 'works') {
+    const fetchWorks = async () => {
+      const q = query(
+        collection(db, 'works'),
+        where('published', '==', true)
+      );
+      const snapshot = await getDocs(q);
+      const items = snapshot.docs.map(doc => doc.data());
+      setWorks(items);
+    };
+    fetchWorks();
+  }
+}, [type]);
+
   return (
     <div
       className={`fixed top-0 ${isLeft ? 'left-0' : 'right-0'} h-full w-1/3 bg-dark text-neutral p-8 z-40 pt-6 transform transition-transform duration-300 ease-in-out ${
@@ -20,20 +39,20 @@ const SidePanel = ({ type, onClose }) => {
         </button>
       </div>
       {type === 'works' ? (
-        <>
-          <a href="/works" className="text-xs mb-4 underline hover:opacity-80 block">
-            Click to view the full index</a>
-          <a href="/works/tarot-tree-of-life" className="block py-1 hover:underline">Tarot Tree of Life - Flex Ensemble</a>
-          <a href="/works/to-autumn" className="block py-1 hover:underline">To Autumn - Pierrot Ensemble</a>
-          <a href="/works/unearthing-home" className="block py-1 hover:underline">Unearthing Home - Piano & Voice</a>
-          <a href="/works/counting-seconds" className="block py-1 hover:underline">Counting Seconds - Piano</a>
-          <a href="/works/corrida" className="block py-1 hover:underline">Corrida - Piano</a>
-          <a href="/works/grafan-imago" className="block py-1 hover:underline">Grafan Imago - Saxophone Quartet</a>
-          <a href="/works/string-quartet" className="block py-1 hover:underline">String Quartet</a>
-          <a href="/works/discretus-discernere" className="block py-1 hover:underline">Discretus & Discernere - String Quartet + Classical Guitar</a>
-          <a href="/works/seven-against-thebes" className="block py-1 hover:underline">Seven Against Thebes - Wind Quintet</a>
-          <a href="/works/counting-down" className="block py-1 hover:underline">Counting Down - Guitar Trio</a>
-          <a href="/works/Guitar + Cello Suite" className="block py-1 hover:underline">Guitar + Cello Suite</a>
+  <>
+    <a href="/works" className="text-xs mb-4 underline hover:opacity-80 block">
+      Click to view the full index
+    </a>
+    {works.map((work) => (
+      <a
+        key={work.slug}
+        href={`/works/${work.slug}`}
+        className="block py-1 hover:underline"
+      >
+        {work.title}
+        {work.instrumentation ? ` – ${work.instrumentation}` : ''}
+      </a>
+    ))}
             </>
       ) : (
         <div className="text-sm leading-snug space-y-2">
