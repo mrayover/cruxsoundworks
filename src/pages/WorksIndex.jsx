@@ -1,36 +1,52 @@
 import React, { useEffect, useState } from 'react';
-import { db } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase';
 import { Link } from 'react-router-dom';
 
-const WorksIndex = () => {
+function WorksIndex() {
   const [works, setWorks] = useState([]);
 
   useEffect(() => {
     const fetchWorks = async () => {
-      const querySnapshot = await getDocs(collection(db, 'works'));
-      const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setWorks(data);
+      const snapshot = await getDocs(collection(db, 'works'));
+      const items = snapshot.docs.map(doc => doc.data());
+      setWorks(items);
     };
-
     fetchWorks();
   }, []);
 
+  const slugify = (text) =>
+    text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+
   return (
-    <section className="px-6 md:px-12 py-12 max-w-5xl mx-auto">
-      <h2 className="text-3xl md:text-5xl font-serif font-semibold mb-6">Works</h2>
-      <ul className="space-y-6">
+    <section className="px-6 md:px-12 py-12 max-w-6xl mx-auto">
+      <h2 className="text-3xl md:text-5xl font-serif font-semibold mb-10">Works</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {works.map((work) => (
-          <li key={work.id} className="bg-gray-50 border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow transition">
-            <Link to={`/works/${work.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '')}`}>
-              <h3 className="text-xl font-serif font-semibold mb-1">{work.title}</h3>
-              <p className="text-sm text-gray-600">{work.instrumentation} · {work.year}</p>
-            </Link>
-          </li>
+          <Link key={work.title} to={`/works/${slugify(work.title)}`}>
+            <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow hover:shadow-md transition">
+              {work.imageURL && (
+                <img
+                  src={work.imageURL}
+                  alt={work.title}
+                  className="w-full h-48 object-cover"
+                />
+              )}
+              <div className="p-4">
+                <h3 className="font-serif text-xl font-semibold">{work.title}</h3>
+                <p className="text-sm text-gray-600 mb-2">
+                  {work.instrumentation} · {work.year}
+                </p>
+                <p className="text-sm text-gray-700 line-clamp-3">
+                  {work.description?.split('\n')[0]}
+                </p>
+              </div>
+            </div>
+          </Link>
         ))}
-      </ul>
+      </div>
     </section>
   );
-};
+}
 
 export default WorksIndex;
