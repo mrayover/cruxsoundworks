@@ -35,42 +35,57 @@ export default function EditWorkModal({ work, isOpen, onClose, onSave }) {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded-lg w-full max-w-xl">
         <h2 className="text-xl font-bold mb-4">Edit Work</h2>
-        <form onSubmit={handleSubmit} className="space-y-3">
-          <input
-            className="w-full p-2 border rounded"
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Title"
-          />
-          <input
-            className="w-full p-2 border rounded"
-            type="text"
-            value={instrumentation}
-            onChange={(e) => setInstrumentation(e.target.value)}
-            placeholder="Instrumentation"
-          />
-          <textarea
-            className="w-full p-2 border rounded"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Description"
-            rows={4}
-          />
-          <input
-            className="w-full p-2 border rounded"
-            type="text"
-            value={imageURL}
-            onChange={(e) => setImageURL(e.target.value)}
-            placeholder="Image URL"
-          />
-          <input
-            className="w-full p-2 border rounded"
-            type="text"
-            value={audioURL}
-            onChange={(e) => setAudioURL(e.target.value)}
-            placeholder="Audio URL"
-          />
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-semibold mb-1">Title</label>
+            <input
+              className="w-full p-2 border rounded"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold mb-1">Instrumentation</label>
+            <input
+              className="w-full p-2 border rounded"
+              type="text"
+              value={instrumentation}
+              onChange={(e) => setInstrumentation(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold mb-1">Description</label>
+            <textarea
+              className="w-full p-2 border rounded"
+              rows={4}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold mb-1">Image URL</label>
+            <input
+              className="w-full p-2 border rounded"
+              type="text"
+              value={imageURL}
+              onChange={(e) => setImageURL(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold mb-1">Audio URL</label>
+            <input
+              className="w-full p-2 border rounded"
+              type="text"
+              value={audioURL}
+              onChange={(e) => setAudioURL(e.target.value)}
+            />
+          </div>
+
           <div className="flex justify-end gap-2">
             <button
               type="button"
