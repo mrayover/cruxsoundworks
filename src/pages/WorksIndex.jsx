@@ -13,6 +13,7 @@ function WorksIndex() {
         collection(db, 'works'),
         where('published', '==', true)
       );
+      
 const snapshot = await getDocs(worksQuery);
 const items = snapshot.docs.map(doc => doc.data());
       setWorks(items);
