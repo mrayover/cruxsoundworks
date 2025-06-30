@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import { Link } from 'react-router-dom';
+
 
 function WorksIndex() {
   const [works, setWorks] = useState([]);
 
   useEffect(() => {
     const fetchWorks = async () => {
-      const snapshot = await getDocs(collection(db, 'works'));
-      const items = snapshot.docs.map(doc => doc.data());
+      const worksQuery = query(
+        collection(db, 'works'),
+        where('published', '==', true)
+      );
+const snapshot = await getDocs(worksQuery);
+const items = snapshot.docs.map(doc => doc.data());
       setWorks(items);
     };
     fetchWorks();
