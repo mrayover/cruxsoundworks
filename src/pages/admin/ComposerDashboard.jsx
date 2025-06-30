@@ -62,10 +62,12 @@ const handleSave = async (updatedWork) => {
     setWorks((prev) =>
       prev.map((w) => (w.id === updatedWork.id ? updatedData : w))
     );
+    
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2500);
 
     handleCloseModal();
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 2500); 
+ 
   } catch (err) {
     console.error('Error updating Firestore:', err);
     alert('Error saving changes.');
