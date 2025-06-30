@@ -124,6 +124,7 @@ const handleSave = async (updatedWork) => {
           {work.duration && (
             <p className="text-sm text-gray-500 italic">Duration: {work.duration}</p>
           )}
+          
           <div className="mt-2 flex gap-4">
             <button
               onClick={() => handleEdit(work)}
