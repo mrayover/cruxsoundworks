@@ -80,6 +80,32 @@ useEffect(() => {
   }
 };
 
+const updateWorkOrder = async (targetWork, swapWithWork) => {
+  const targetRef = doc(db, 'works', targetWork.id);
+  const swapRef = doc(db, 'works', swapWithWork.id);
+
+  const targetOrder = targetWork.displayOrder;
+  const swapOrder = swapWithWork.displayOrder;
+
+  try {
+    await updateDoc(targetRef, { displayOrder: swapOrder });
+    await updateDoc(swapRef, { displayOrder: targetOrder });
+
+    setWorks((prev) =>
+      prev.map(w =>
+        w.id === targetWork.id
+          ? { ...w, displayOrder: swapOrder }
+          : w.id === swapWithWork.id
+          ? { ...w, displayOrder: targetOrder }
+          : w
+      ).sort((a, b) => a.displayOrder - b.displayOrder)
+    );
+  } catch (err) {
+    console.error('Error reordering:', err);
+    alert('Failed to update order.');
+  }
+};
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedWork(null);
@@ -141,10 +167,26 @@ const handleSave = async (updatedWork) => {
     </div>
     {/* List of Works */}
     <div className="grid gap-4">
-      {works.map((work) => (
+      {works.map((work, i) => (
         <div key={work.id} className="p-4 border rounded bg-gray-50">
           <h2 className="font-bold text-lg">{work.title}</h2>
           <p className="text-sm text-gray-600">{work.instrumentation}</p>
+          <div className="flex gap-2 mt-1">
+            <button
+              disabled={i === 0}
+              onClick={() => updateWorkOrder(work, works[i - 1])}
+              className="text-xs text-gray-500 hover:underline disabled:opacity-30"
+            >
+              ↑ Up
+            </button>
+            <button
+              disabled={i === works.length - 1}
+              onClick={() => updateWorkOrder(work, works[i + 1])}
+              className="text-xs text-gray-500 hover:underline disabled:opacity-30"
+            >
+              ↓ Down
+            </button>
+          </div>
           {work.duration && (
             <p className="text-sm text-gray-500 italic">Duration: {work.duration}</p>
           )}
@@ -162,7 +204,9 @@ const handleSave = async (updatedWork) => {
             >
               Delete
             </button>
+            
           </div>
+          
         </div>
       ))}
     </div>
