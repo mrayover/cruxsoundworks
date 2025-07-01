@@ -14,14 +14,38 @@ export default function ComposerDashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchWorks = async () => {
-      const querySnapshot = await getDocs(collection(db, 'works'));
-      const items = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setWorks(items);
-    };
-    fetchWorks();
-  }, []);
+useEffect(() => {
+  const fetchWorks = async () => {
+    const querySnapshot = await getDocs(collection(db, 'works'));
+    const items = querySnapshot.docs.map((docSnap) => ({
+      id: docSnap.id,
+      ...docSnap.data(),
+    }));
+
+    // Sort alphabetically (or however you like)
+    const sorted = [...items].sort((a, b) =>
+      (a.title || '').localeCompare(b.title || '')
+    );
+
+    // Assign displayOrder if missing
+    const updates = [];
+    sorted.forEach((work, index) => {
+      if (work.displayOrder === undefined) {
+        const workRef = doc(db, 'works', work.id);
+        updates.push(updateDoc(workRef, { displayOrder: index + 1 }));
+        work.displayOrder = index + 1;
+      }
+    });
+
+    await Promise.all(updates);
+
+    sorted.sort((a, b) => a.displayOrder - b.displayOrder);
+    setWorks(sorted);
+  };
+
+  fetchWorks();
+}, []);
+
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 

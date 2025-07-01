@@ -17,7 +17,11 @@ export default function AddWorkModal({ isOpen, onClose, onAdd }) {
     const newWork = { title, instrumentation, duration, description, imageURL, audioURL, slug, published  };
 
     try {
-      const docRef = await addDoc(collection(db, 'works'), newWork);
+      const docRef = await addDoc(collection(db, 'works'), {
+  ...newWork,
+  displayOrder: Date.now() // Temporary large number to push it to the end
+      });
+
       onAdd({ id: docRef.id, ...newWork });
       onClose();
     } catch (err) {
