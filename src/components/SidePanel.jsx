@@ -9,7 +9,11 @@ const SidePanel = (props) => {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
+ if (!mounted) return (
+  <aside className="text-sm text-gray-400 p-4">
+    Loading sidebar...
+  </aside>
+);
 
   return (
     <Suspense fallback={null}>
