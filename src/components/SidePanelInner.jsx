@@ -90,3 +90,7 @@ useEffect(() => {
 };
 
 export default SidePanel;
+
+// Requires Firestore index:
+// published (asc), displayOrder (asc)
+// https://console.firebase.google.com/project/cruxsoundworks/firestore/indexes
