@@ -1,12 +1,13 @@
 // Full replacement for src/pages/admin/ComposerDashboard.jsx
 
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, updateDoc, deleteDoc, addDoc } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import { auth, db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import EditWorkModal from '../../components/EditWorkModal';
 import AddWorkModal from '../../components/AddWorkModal';
+import AddCalendarEventModal from '../../components/AddCalendarEventModal';
 
 export default function ComposerDashboard() {
   const [works, setWorks] = useState([]);
@@ -45,7 +46,32 @@ useEffect(() => {
 
   fetchWorks();
 }, []);
+const [calendarEvents, setCalendarEvents] = useState([]);
+const [showEventModal, setShowEventModal] = useState(false);
 
+useEffect(() => {
+  const fetchEvents = async () => {
+    const snapshot = await getDocs(collection(db, 'calendarEvents'));
+    const items = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    const sorted = [...items].sort((a, b) => new Date(a.date) - new Date(b.date));
+    setCalendarEvents(sorted);
+  };
+
+  fetchEvents();
+}, []);
+
+const handleAddEvent = async (eventData) => {
+  try {
+    const docRef = await addDoc(collection(db, 'calendarEvents'), eventData);
+    setCalendarEvents(prev => [...prev, { id: docRef.id, ...eventData }]);
+  } catch (err) {
+    console.error('Error adding event:', err);
+    alert('Failed to add event.');
+  }
+};
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
@@ -210,6 +236,36 @@ const handleSave = async (updatedWork) => {
         </div>
       ))}
     </div>
+<hr className="my-10" />
+
+<div className="mb-6 flex justify-between items-center">
+  <h2 className="text-xl font-serif">📅 Calendar Events</h2>
+  <button
+    onClick={() => setShowEventModal(true)}
+    className="text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+  >
+    + New Event
+  </button>
+</div>
+
+<ul className="grid gap-4">
+  {calendarEvents.map(ev => (
+    <li key={ev.id} className="p-4 border rounded bg-white">
+      <h3 className="font-semibold">{ev.title}</h3>
+      <p className="text-sm text-gray-600">{new Date(ev.date).toLocaleString()}</p>
+      <p className="text-sm">{ev.location}</p>
+      {ev.link && (
+        <a href={ev.link} target="_blank" className="text-blue-500 text-sm underline">More Info</a>
+      )}
+    </li>
+  ))}
+</ul>
+
+<AddCalendarEventModal
+  isOpen={showEventModal}
+  onClose={() => setShowEventModal(false)}
+  onAdd={handleAddEvent}
+/>
 
     {/* Edit Modal */}
     <EditWorkModal
@@ -233,5 +289,6 @@ const handleSave = async (updatedWork) => {
       </div>
     )}
   </div>
+  
 );
 }
