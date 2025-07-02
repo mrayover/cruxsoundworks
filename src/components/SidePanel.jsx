@@ -9,18 +9,24 @@ const SidePanel = ({ type, onClose }) => {
 useEffect(() => {
   if (type === 'works') {
     const fetchWorks = async () => {
-      const q = query(
-        collection(db, 'works'),
-        where('published', '==', true),
-        orderBy('displayOrder')
-      );
-      const snapshot = await getDocs(q);
-      const items = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setWorks(items);
+      try {
+        const q = query(
+          collection(db, 'works'),
+          where('published', '==', true),
+          orderBy('displayOrder')
+        );
+        const snapshot = await getDocs(q);
+        const items = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        console.log('[SidePanel] Fetched works:', items); // ✅ Debug log
+        setWorks(items);
+      } catch (err) {
+        console.error('[SidePanel] Firestore fetch failed:', err);
+      }
     };
     fetchWorks();
   }
 }, [type]);
+
 
   return (
     <div
