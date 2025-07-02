@@ -15,7 +15,7 @@ useEffect(() => {
         orderBy('displayOrder')
       );
       const snapshot = await getDocs(q);
-      const items = snapshot.docs.map(doc => doc.data());
+      const items = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setWorks(items);
     };
     fetchWorks();
