@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs, query, where, orderBy} from 'firebase/firestore';
+import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
 import { db } from '../firebase';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ function WorksIndex() {
     const fetchWorks = async () => {
       const worksQuery = query(
         collection(db, 'works'),
-        where('published', '==', true)
+        where('published', '==', true),
         orderBy('displayOrder')
       );
       
