@@ -16,9 +16,13 @@ export default function Calendar() {
     fetchEvents();
   }, []);
 
-  return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-6">Upcoming Performances</h1>
+return (
+  <div className="max-w-3xl mx-auto px-4 py-8">
+    <h1 className="text-2xl font-bold mb-6">Upcoming Performances</h1>
+
+    {events.length === 0 ? (
+      <p className="text-center text-gray-600 italic">No upcoming performances yet. Check back soon!</p>
+    ) : (
       <ul className="space-y-4">
         {events.map(event => (
           <li key={event.id} className="border p-4 rounded">
@@ -32,6 +36,7 @@ export default function Calendar() {
           </li>
         ))}
       </ul>
-    </div>
-  );
+    )}
+  </div>
+);
 }
