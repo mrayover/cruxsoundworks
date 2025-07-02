@@ -10,19 +10,35 @@ useEffect(() => {
   if (type === 'works') {
     const fetchWorks = async () => {
       try {
+        if (!db) {
+          console.warn('[SidePanel] Firebase DB not initialized');
+          return;
+        }
+
         const q = query(
           collection(db, 'works'),
           where('published', '==', true),
           orderBy('displayOrder')
         );
         const snapshot = await getDocs(q);
-        const items = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        console.log('[SidePanel] Fetched works:', items); // ✅ Debug log
+
+        const items = snapshot.docs.map(doc => {
+          const data = doc.data();
+          if (!data.title || !data.slug) {
+            console.warn('[SidePanel] Skipping invalid work:', data);
+            return null;
+          }
+          return { id: doc.id, ...data };
+        }).filter(Boolean);
+
+        console.log('[SidePanel] Loaded works:', items);
         setWorks(items);
       } catch (err) {
-        console.error('[SidePanel] Firestore fetch failed:', err);
+        console.error('[SidePanel] Firestore query failed:', err);
+        setWorks([]);
       }
     };
+
     fetchWorks();
   }
 }, [type]);
@@ -45,31 +61,33 @@ useEffect(() => {
           Close
         </button>
       </div>
-      {type === 'works' ? (
+{type === 'works' ? (
   <>
     <a href="/works" className="text-xs mb-4 underline hover:opacity-80 block">
       Click to view the full index
     </a>
-   {works
-  .filter((work) => !!work.slug) // only works with valid slugs
-  .map((work) => (
-    <a
-      key={work.slug}
-      href={`/works/${work.slug}`}
-      className="block py-1 hover:underline"
+    {works?.length > 0 ? (
+      works.map((work) => (
+        <a
+          key={work.slug}
+          href={`/works/${work.slug}`}
+          className="block py-1 hover:underline"
         >
           {work.title}
           {work.instrumentation ? ` – ${work.instrumentation}` : ''}
         </a>
-    ))}
-            </>
-      ) : (
-        <div className="text-sm leading-snug space-y-2">
-          <p>Offering private lessons in guitar, composition, and music theory.</p>
-          <p>Available for all skill levels, in-person and online.</p>
-          <p>Click 'Lessons' above to learn more and book a session.</p>
-        </div>
-      )}
+      ))
+    ) : (
+      <p className="text-sm italic text-neutral-300">No works available.</p>
+    )}
+  </>
+) : (
+  <div className="text-sm leading-snug space-y-2">
+    <p>Offering private lessons in guitar, composition, and music theory.</p>
+    <p>Available for all skill levels, in-person and online.</p>
+    <p>Click 'Lessons' above to learn more and book a session.</p>
+  </div>
+)}
     </div>
   );
 };
