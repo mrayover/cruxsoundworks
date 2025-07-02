@@ -7,14 +7,14 @@ const SidePanel = ({ type, onClose }) => {
   const [works, setWorks] = useState([]);
 
 useEffect(() => {
+  if (typeof window === 'undefined') {
+    console.warn('[SidePanel] Skipping fetch on server');
+    return;
+  }
+
   if (type === 'works') {
     const fetchWorks = async () => {
       try {
-        if (!db) {
-          console.warn('[SidePanel] Firebase DB not initialized');
-          return;
-        }
-
         const q = query(
           collection(db, 'works'),
           where('published', '==', true),
@@ -22,19 +22,15 @@ useEffect(() => {
         );
         const snapshot = await getDocs(q);
 
-        const items = snapshot.docs.map(doc => {
-          const data = doc.data();
-          if (!data.title || !data.slug) {
-            console.warn('[SidePanel] Skipping invalid work:', data);
-            return null;
-          }
-          return { id: doc.id, ...data };
-        }).filter(Boolean);
+        const items = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
 
-        console.log('[SidePanel] Loaded works:', items);
+        console.log('[SidePanel] Works fetched:', items);
         setWorks(items);
       } catch (err) {
-        console.error('[SidePanel] Firestore query failed:', err);
+        console.error('[SidePanel] Firestore fetch failed:', err);
         setWorks([]);
       }
     };
@@ -42,7 +38,6 @@ useEffect(() => {
     fetchWorks();
   }
 }, [type]);
-
 
   return (
     <div
