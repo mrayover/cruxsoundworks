@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { db } from '../firebase';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
 
 const SidePanel = ({ type, onClose }) => {
   const isLeft = type === 'works';
@@ -11,7 +11,8 @@ useEffect(() => {
     const fetchWorks = async () => {
       const q = query(
         collection(db, 'works'),
-        where('published', '==', true)
+        where('published', '==', true),
+        orderBy('displayOrder')
       );
       const snapshot = await getDocs(q);
       const items = snapshot.docs.map(doc => doc.data());
