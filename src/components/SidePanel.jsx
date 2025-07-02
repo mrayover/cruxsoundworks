@@ -22,11 +22,6 @@ useEffect(() => {
   }
 }, [type]);
 
-{type === 'works' && (
-  <div className="text-xs text-green-500 mb-2">
-    Loaded {works.length} works
-  </div>
-)}
   return (
     <div
       className={`fixed top-0 ${isLeft ? 'left-0' : 'right-0'} h-full w-1/3 bg-dark text-neutral p-8 z-40 pt-6 transform transition-transform duration-300 ease-in-out ${
@@ -51,8 +46,8 @@ useEffect(() => {
     </a>
     {works.map((work) => (
       <a
-        key={work.slug}
-        href={`/works/${work.slug}`}
+        key={work.id || work.slug}
+        href={work.slug ? `/works/${work.slug}` : '#'}
         className="block py-1 hover:underline"
       >
         {work.title}
