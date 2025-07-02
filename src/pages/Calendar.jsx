@@ -1,42 +1,69 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
+import { Calendar as BigCalendar, dateFnsLocalizer } from 'react-big-calendar';
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
+import startOfWeek from 'date-fns/startOfWeek';
+import getDay from 'date-fns/getDay';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 
-export default function Calendar() {
+const locales = {
+  'en-US': require('date-fns/locale/en-US'),
+};
+
+const localizer = dateFnsLocalizer({
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  locales,
+});
+
+export default function CalendarPage() {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
     const fetchEvents = async () => {
       const snapshot = await getDocs(collection(db, 'calendarEvents'));
-      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      const sorted = data.sort((a, b) => new Date(a.date) - new Date(b.date));
-      setEvents(sorted);
+      const data = snapshot.docs.map(doc => {
+        const raw = doc.data();
+        return {
+          id: doc.id,
+          title: raw.title,
+          start: new Date(raw.date),
+          end: new Date(raw.date),
+          location: raw.location,
+          description: raw.description,
+          link: raw.link,
+        };
+      });
+      setEvents(data);
     };
 
     fetchEvents();
   }, []);
 
-return (
-  <div className="max-w-3xl mx-auto px-4 py-8">
-    <h1 className="text-2xl font-bold mb-6">Upcoming Performances</h1>
+  const eventPropGetter = () => ({
+    style: {
+      backgroundColor: '#403233',
+      color: '#fff',
+      borderRadius: '4px',
+      padding: '2px',
+    },
+  });
 
-    {events.length === 0 ? (
-      <p className="text-center text-gray-600 italic">No upcoming performances yet. Check back soon!</p>
-    ) : (
-      <ul className="space-y-4">
-        {events.map(event => (
-          <li key={event.id} className="border p-4 rounded">
-            <h2 className="font-semibold text-lg">{event.title}</h2>
-            <p className="text-sm text-gray-600">{new Date(event.date).toLocaleString()}</p>
-            <p className="text-sm text-gray-700">{event.location}</p>
-            {event.description && <p className="text-sm mt-2">{event.description}</p>}
-            {event.link && (
-              <a href={event.link} target="_blank" className="text-blue-600 underline mt-1 block">More Info</a>
-            )}
-          </li>
-        ))}
-      </ul>
-    )}
-  </div>
-);
+  return (
+    <div className="max-w-5xl mx-auto px-4 py-10">
+      <h1 className="text-2xl font-bold mb-4 text-center">Performance Calendar</h1>
+      <BigCalendar
+        localizer={localizer}
+        events={events}
+        startAccessor="start"
+        endAccessor="end"
+        style={{ height: 600 }}
+        eventPropGetter={eventPropGetter}
+      />
+    </div>
+  );
 }
