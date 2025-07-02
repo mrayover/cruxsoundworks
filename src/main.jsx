@@ -7,6 +7,7 @@ import Layout from './components/Layout'
 import WorksIndex from './pages/WorksIndex';
 import WorkDetail from './pages/WorkDetail';
 import AdminAddWork from './pages/AdminAddWork';
+import Calendar from './pages/Calendar';
 
 import Login from './pages/admin/Login'
 import ComposerDashboard from './pages/admin/ComposerDashboard'
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Router>
         <Layout>
           <Routes>
+            <Route path="/calendar" element={<Calendar />} />
             <Route path="/" element={<App />} />
             <Route path="/works" element={<WorksIndex />} />
             <Route path="/works/:slug" element={<WorkDetail />} />
