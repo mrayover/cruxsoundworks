@@ -8,9 +8,12 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 
+import enUS from 'date-fns/locale/en-US';
+
 const locales = {
-  'en-US': require('date-fns/locale/en-US'),
+  'en-US': enUS,
 };
+
 
 const localizer = dateFnsLocalizer({
   format,
