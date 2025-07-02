@@ -44,15 +44,17 @@ useEffect(() => {
     <a href="/works" className="text-xs mb-4 underline hover:opacity-80 block">
       Click to view the full index
     </a>
-    {works.map((work) => (
-      <a
-        key={work.id || work.slug}
-        href={work.slug ? `/works/${work.slug}` : '#'}
-        className="block py-1 hover:underline"
-      >
-        {work.title}
-        {work.instrumentation ? ` – ${work.instrumentation}` : ''}
-      </a>
+   {works
+  .filter((work) => !!work.slug) // only works with valid slugs
+  .map((work) => (
+    <a
+      key={work.slug}
+      href={`/works/${work.slug}`}
+      className="block py-1 hover:underline"
+        >
+          {work.title}
+          {work.instrumentation ? ` – ${work.instrumentation}` : ''}
+        </a>
     ))}
             </>
       ) : (
