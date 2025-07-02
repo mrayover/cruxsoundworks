@@ -66,6 +66,11 @@ export default function CalendarPage() {
         endAccessor="end"
         style={{ height: 600 }}
         eventPropGetter={eventPropGetter}
+        onSelectEvent={(event) => {
+  alert(
+    `${event.title}\n\n${event.location}\n${new Date(event.start).toLocaleString()}\n\n${event.description || ''}`
+  );
+}}
       />
     </div>
   );
