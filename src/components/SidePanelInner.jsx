@@ -12,32 +12,34 @@ useEffect(() => {
     return;
   }
 
-  if (type === 'works') {
-    const fetchWorks = async () => {
-      try {
-        const q = query(
-          collection(db, 'works'),
-          where('published', '==', true),
-          orderBy('displayOrder')
-        );
-        const snapshot = await getDocs(q);
+  const fetchWorks = async () => {
+    try {
+      const q = query(
+        collection(db, 'works'),
+        where('published', '==', true),
+        orderBy('displayOrder')
+      );
+      const snapshot = await getDocs(q);
 
-        const items = snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        console.log('[SidePanel] Works fetched:', items);
-        setWorks(items);
-      } catch (err) {
-        console.error('[SidePanel] Firestore fetch failed:', err);
-        setWorks([]);
+      console.log('[SidePanel] Snapshot size:', snapshot.size);
+      if (snapshot.empty) {
+        console.warn('[SidePanel] No documents returned from query.');
       }
-    };
 
-    fetchWorks();
-  }
-}, [type]);
+      const items = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      console.log('[SidePanel] Fetched:', items);
+      setWorks(items);
+    } catch (err) {
+      console.error('[SidePanel] Firestore error:', err);
+    }
+  };
+
+  fetchWorks();
+}, []);
 
   return (
     <div
