@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
 
 export default function AddCalendarEventModal({ isOpen, onClose, onAdd, initialValues }) {
-  const [form, setForm] = useState(() => ({
-    title: initialValues?.title || '',
-    date: '', // always force blank so user sets it manually
-    location: initialValues?.location || '',
-    description: initialValues?.description || '',
-    link: initialValues?.link || ''
-  }));
+const [form, setForm] = useState({
+  title: '',
+  date: '',
+  location: '',
+  description: '',
+  link: ''
+});
+
+useEffect(() => {
+  if (initialValues) {
+    setForm({
+      title: initialValues.title || '',
+      date: '', // always blank for duplicates
+      location: initialValues.location || '',
+      description: initialValues.description || '',
+      link: initialValues.link || ''
+    });
+  }
+}, [initialValues]);
 
 
   const handleChange = (e) => {
