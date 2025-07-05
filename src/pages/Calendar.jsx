@@ -50,14 +50,18 @@ export default function CalendarPage() {
     fetchEvents();
   }, []);
 
-  const eventPropGetter = () => ({
-    style: {
-      backgroundColor: '#403233',
-      color: '#fff',
-      borderRadius: '4px',
-      padding: '2px',
-    },
-  });
+const eventPropGetter = () => ({
+  style: {
+    backgroundColor: '#3d2d2e',
+    color: '#f5f5f5',
+    border: '1px solid #5e4445',
+    borderRadius: '6px',
+    padding: '3px 6px',
+    fontSize: '0.875rem',
+    cursor: 'pointer',
+  },
+});
+
 
 
   return (
