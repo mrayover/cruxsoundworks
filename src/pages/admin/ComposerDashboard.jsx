@@ -8,6 +8,10 @@ import { useNavigate } from 'react-router-dom';
 import EditWorkModal from '../../components/EditWorkModal';
 import AddWorkModal from '../../components/AddWorkModal';
 import AddCalendarEventModal from '../../components/AddCalendarEventModal';
+import EditCalendarEventModal from '../../components/EditCalendarEventModal';
+
+const [isEditEventModalOpen, setIsEditEventModalOpen] = useState(false);
+const [selectedEvent, setSelectedEvent] = useState(null);
 
 export default function ComposerDashboard() {
   const [works, setWorks] = useState([]);
@@ -72,6 +76,43 @@ const handleAddEvent = async (eventData) => {
     alert('Failed to add event.');
   }
 };
+const handleEditEvent = (event) => {
+  setSelectedEvent(event);
+  setIsEditEventModalOpen(true);
+};
+
+const handleSaveEvent = async (updatedEvent) => {
+  const eventRef = doc(db, 'calendarEvents', updatedEvent.id);
+  try {
+    await updateDoc(eventRef, {
+      title: updatedEvent.title,
+      date: updatedEvent.date,
+      location: updatedEvent.location,
+      description: updatedEvent.description,
+      link: updatedEvent.link,
+    });
+
+    setCalendarEvents(prev =>
+      prev.map(ev => (ev.id === updatedEvent.id ? { ...updatedEvent } : ev))
+    );
+  } catch (err) {
+    console.error('Error updating event:', err);
+    alert('Failed to save event.');
+  }
+};
+
+const handleDeleteEvent = async (event) => {
+  const confirmed = window.confirm(`Delete event: "${event.title}"? This cannot be undone.`);
+  if (!confirmed) return;
+
+  try {
+    await deleteDoc(doc(db, 'calendarEvents', event.id));
+    setCalendarEvents(prev => prev.filter(ev => ev.id !== event.id));
+  } catch (err) {
+    console.error('Error deleting event:', err);
+    alert('Failed to delete event.');
+  }
+};
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
@@ -105,6 +146,7 @@ const handleAddEvent = async (eventData) => {
     alert('Failed to delete work.');
   }
 };
+
 
 const updateWorkOrder = async (targetWork, swapWithWork) => {
   const targetRef = doc(db, 'works', targetWork.id);
@@ -250,21 +292,26 @@ const handleSave = async (updatedWork) => {
 
 <ul className="grid gap-4">
   {calendarEvents.map(ev => (
-    <li key={ev.id} className="p-4 border rounded bg-white">
-      <h3 className="font-semibold">{ev.title}</h3>
-      <p className="text-sm text-gray-600">{new Date(ev.date).toLocaleString()}</p>
-      <p className="text-sm">{ev.location}</p>
-      {ev.link && (
-        <a href={ev.link} target="_blank" className="text-blue-500 text-sm underline">More Info</a>
-      )}
-    </li>
+<li key={ev.id} className="p-4 border rounded bg-white">
+  <h3 className="font-semibold">{ev.title}</h3>
+  <p className="text-sm text-gray-600">{new Date(ev.date).toLocaleString()}</p>
+  <p className="text-sm">{ev.location}</p>
+  {ev.link && (
+    <a href={ev.link} target="_blank" className="text-blue-500 text-sm underline">More Info</a>
+  )}
+  <div className="flex gap-4 mt-2">
+    <button onClick={() => handleEditEvent(ev)} className="text-blue-600 text-sm underline">Edit</button>
+    <button onClick={() => handleDeleteEvent(ev)} className="text-red-600 text-sm underline">Delete</button>
+  </div>
+</li>
   ))}
 </ul>
 
-<AddCalendarEventModal
-  isOpen={showEventModal}
-  onClose={() => setShowEventModal(false)}
-  onAdd={handleAddEvent}
+<EditCalendarEventModal
+  isOpen={isEditEventModalOpen}
+  onClose={() => setIsEditEventModalOpen(false)}
+  onSave={handleSaveEvent}
+  event={selectedEvent}
 />
 
     {/* Edit Modal */}
