@@ -10,14 +10,13 @@ import AddWorkModal from '../../components/AddWorkModal';
 import AddCalendarEventModal from '../../components/AddCalendarEventModal';
 import EditCalendarEventModal from '../../components/EditCalendarEventModal';
 
-const [isEditEventModalOpen, setIsEditEventModalOpen] = useState(false);
-const [selectedEvent, setSelectedEvent] = useState(null);
-
 export default function ComposerDashboard() {
   const [works, setWorks] = useState([]);
   const [selectedWork, setSelectedWork] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const [isEditEventModalOpen, setIsEditEventModalOpen] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
 useEffect(() => {
   const fetchWorks = async () => {
