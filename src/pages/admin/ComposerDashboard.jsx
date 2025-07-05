@@ -290,13 +290,6 @@ const handleSave = async (updatedWork) => {
         </div>
       ))}
     </div>
-    <div className="flex gap-4 mt-2">
-  <button onClick={() => handleEditEvent(ev)} className="text-blue-600 text-sm underline">Edit</button>
-  <button onClick={() => handleDeleteEvent(ev)} className="text-red-600 text-sm underline">Delete</button>
-</div>
-<button onClick={() => handleDuplicateEvent(ev)} className="text-sm text-gray-700 underline">
-  Duplicate
-</button>
 
 <hr className="my-10" />
 
@@ -322,6 +315,7 @@ const handleSave = async (updatedWork) => {
   <div className="flex gap-4 mt-2">
     <button onClick={() => handleEditEvent(ev)} className="text-blue-600 text-sm underline">Edit</button>
     <button onClick={() => handleDeleteEvent(ev)} className="text-red-600 text-sm underline">Delete</button>
+    <button onClick={() => handleDuplicateEvent(ev)} className="text-sm text-gray-700 underline">Duplicate</button>
   </div>
 </li>
   ))}
