@@ -99,9 +99,6 @@ const eventPropGetter = () => ({
     </div>
   </div>
 )}
-  alert(
-    `${event.title}\n\n${event.location}\n${new Date(event.start).toLocaleString()}\n\n${event.description || ''}`
-  );
     </div>
   );
 }
