@@ -91,7 +91,6 @@ const handleEditEvent = (event) => {
   setIsEditEventModalOpen(false);
   setTimeout(() => setShowEventModal(true), 100); // delay to avoid modal collision
 };
-
 };
 
 const handleSaveEvent = async (updatedEvent) => {
@@ -287,16 +286,18 @@ const handleSave = async (updatedWork) => {
             </button>
             
           </div>
-          <div className="flex gap-4 mt-2">
+          
+        </div>
+      ))}
+    </div>
+    <div className="flex gap-4 mt-2">
   <button onClick={() => handleEditEvent(ev)} className="text-blue-600 text-sm underline">Edit</button>
   <button onClick={() => handleDeleteEvent(ev)} className="text-red-600 text-sm underline">Delete</button>
 </div>
 <button onClick={() => handleDuplicateEvent(ev)} className="text-sm text-gray-700 underline">
   Duplicate
 </button>
-        </div>
-      ))}
-    </div>
+
 <hr className="my-10" />
 
 <div className="mb-6 flex justify-between items-center">
@@ -331,6 +332,12 @@ const handleSave = async (updatedWork) => {
   onClose={() => setIsEditEventModalOpen(false)}
   onSave={handleSaveEvent}
   event={selectedEvent}
+/>
+<AddCalendarEventModal
+  isOpen={showEventModal}
+  onClose={() => setShowEventModal(false)}
+  onAdd={handleAddEvent}
+  initialValues={selectedEvent}
 />
 
     {/* Edit Modal */}

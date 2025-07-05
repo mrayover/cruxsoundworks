@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-export default function AddCalendarEventModal({ isOpen, onClose, onAdd }) {
-  const [form, setForm] = useState({
+export default function AddCalendarEventModal({ isOpen, onClose, onAdd, initialValues }) {
+  const [form, setForm] = useState(initialValues || {
     title: '',
     date: '',
     location: '',
