@@ -78,10 +78,12 @@ const handleAddEvent = async (eventData) => {
 const handleEditEvent = (event) => {
   setSelectedEvent(event);
   setIsEditEventModalOpen(true);
-  const handleDuplicateEvent = (event) => {
+};
+
+const handleDuplicateEvent = (event) => {
   const copied = {
     title: event.title,
-    date: '', // clear date so user picks a new one
+    date: '',
     location: event.location,
     description: event.description,
     link: event.link,
@@ -89,9 +91,10 @@ const handleEditEvent = (event) => {
 
   setSelectedEvent(copied);
   setIsEditEventModalOpen(false);
-  setTimeout(() => setShowEventModal(true), 100); // delay to avoid modal collision
+  setTimeout(() => setShowEventModal(true), 100);
 };
-};
+
+
 
 const handleSaveEvent = async (updatedEvent) => {
   const eventRef = doc(db, 'calendarEvents', updatedEvent.id);
