@@ -13,8 +13,6 @@ import EditCalendarEventModal from '../../components/EditCalendarEventModal';
 const [isEditEventModalOpen, setIsEditEventModalOpen] = useState(false);
 const [selectedEvent, setSelectedEvent] = useState(null);
 
-export default function EditCalendarEventModal({ isOpen, onClose, onSave, event }) {
-
 export default function ComposerDashboard() {
   const [works, setWorks] = useState([]);
   const [selectedWork, setSelectedWork] = useState(null);
