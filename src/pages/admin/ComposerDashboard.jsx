@@ -78,6 +78,20 @@ const handleAddEvent = async (eventData) => {
 const handleEditEvent = (event) => {
   setSelectedEvent(event);
   setIsEditEventModalOpen(true);
+  const handleDuplicateEvent = (event) => {
+  const copied = {
+    title: event.title,
+    date: '', // clear date so user picks a new one
+    location: event.location,
+    description: event.description,
+    link: event.link,
+  };
+
+  setSelectedEvent(copied);
+  setIsEditEventModalOpen(false);
+  setTimeout(() => setShowEventModal(true), 100); // delay to avoid modal collision
+};
+
 };
 
 const handleSaveEvent = async (updatedEvent) => {
@@ -273,7 +287,13 @@ const handleSave = async (updatedWork) => {
             </button>
             
           </div>
-          
+          <div className="flex gap-4 mt-2">
+  <button onClick={() => handleEditEvent(ev)} className="text-blue-600 text-sm underline">Edit</button>
+  <button onClick={() => handleDeleteEvent(ev)} className="text-red-600 text-sm underline">Delete</button>
+</div>
+<button onClick={() => handleDuplicateEvent(ev)} className="text-sm text-gray-700 underline">
+  Duplicate
+</button>
         </div>
       ))}
     </div>
