@@ -1,6 +1,6 @@
 import Home from './Home';
-import CruxWorks from './pages/CruxWorks/Index';
-import FresnoComposersSociety from './pages/FresnoComposersSociety/Index';
+import CruxWorks from './pages/CruxWorks/index';
+import FresnoComposersSociety from './pages/FresnoComposersSociety/index';
 
 function App() {
   return <Home />;
