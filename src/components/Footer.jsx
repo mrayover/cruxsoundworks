@@ -16,7 +16,7 @@ export default function Footer() {
         </div>
         <div className="mt-4 text-sm text-center text-muted-foreground space-x-4">
       <a href="/fresnocomposersociety" className="hover:underline">Fresno Composers Society</a>
-      <a href="/cruxworks" className="hover:underline">CruxWorks Label</a>
+      <a href="/cruxworks" className="hover:underline">CruxWorks</a>
     </div>
 
       </footer>
