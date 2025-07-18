@@ -14,6 +14,11 @@ export default function Footer() {
           <a href="https://instagram.com" target="_blank" className="hover:underline">Instagram</a>
           <a href="https://soundcloud.com" target="_blank" className="hover:underline">SoundCloud</a>
         </div>
+        <div className="mt-4 text-sm text-center text-muted-foreground space-x-4">
+      <a href="/fresnocomposersociety" className="hover:underline">Fresno Composers Society</a>
+      <a href="/cruxworks" className="hover:underline">CruxWorks Label</a>
+    </div>
+
       </footer>
         );
 }
