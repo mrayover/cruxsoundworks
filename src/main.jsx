@@ -15,8 +15,8 @@ import ComposerDashboard from './pages/admin/ComposerDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminIndex from './pages/admin/AdminIndex';
 
-import CruxWorks from './pages/CruxWorks/Index';
-import FresnoComposersSociety from './pages/FresnoComposersSociety/Index';
+import CruxWorks from './pages/CruxWorks/index';
+import FresnoComposersSociety from './pages/FresnoComposersSociety/index';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
