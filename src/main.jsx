@@ -9,9 +9,12 @@ import WorksIndex from './pages/WorksIndex';
 import WorkDetail from './pages/WorkDetail';
 import AdminAddWork from './pages/AdminAddWork';
 import Calendar from './pages/Calendar';
+import ComposerAdminWrapper from './pages/admin/composer/index';
+import ComposerWorks from './pages/admin/composer/works';
+import ComposerCalendar from './pages/admin/composer/calendar';
+import ComposerContact from './pages/admin/composer/contact';
 
 import Login from './pages/admin/Login';
-import ComposerDashboard from './pages/admin/ComposerDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminIndex from './pages/admin/AdminIndex';
 
@@ -33,14 +36,19 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="/admin/add-work" element={<AdminAddWork />} />
             <Route path="/admin" element={<AdminIndex />} />
             <Route path="/admin/composer/login" element={<Login />} />
-            <Route
-              path="/admin/composer"
-              element={
-                <ProtectedRoute>
-                  <ComposerDashboard />
-                </ProtectedRoute>
-              }
-            />
+<Route
+  path="/admin/composer"
+  element={
+    <ProtectedRoute>
+      <ComposerAdminWrapper />
+    </ProtectedRoute>
+  }
+>
+  <Route index element={<Navigate to="works" />} />
+  <Route path="works" element={<ComposerWorks />} />
+  <Route path="calendar" element={<ComposerCalendar />} />
+  <Route path="contact" element={<ComposerContact />} />
+</Route>
             <Route path="/cruxworks" element={<CruxWorks />} />
             <Route path="/fresnocomposersociety" element={<FresnoComposersSociety />} />
             <Route path="/fresno" element={<Navigate to="/fresnocomposersociety" />} />
