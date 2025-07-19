@@ -49,9 +49,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <Route path="works" element={<ComposerWorks />} />
   <Route path="calendar" element={<ComposerCalendar />} />
   <Route path="contact" element={<ComposerContact />} />
-  <Route path="/contact" element={<Contact />} />
+
 </Route>
             <Route path="/cruxworks" element={<CruxWorks />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/fresnocomposersociety" element={<FresnoComposersSociety />} />
             <Route path="/fresno" element={<Navigate to="/fresnocomposersociety" />} />
             <Route path="/fcs" element={<Navigate to="/fresnocomposersociety" />} />
