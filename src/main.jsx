@@ -16,7 +16,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import AdminIndex from './pages/admin/AdminIndex';
 
 import CruxWorks from './pages/cruxworks/index';
-import FresnoComposersSociety from './pages/fresnocomposersociety/index';
+import FresnoComposersSociety from './pages/fresnocomposerssociety/index';
 
 import { AuthProvider } from './context/AuthContext'; // 🛠️ THIS was missing
 
