@@ -13,6 +13,7 @@ import ComposerAdminWrapper from './pages/admin/composer/index';
 import ComposerWorks from './pages/admin/composer/works';
 import ComposerCalendar from './pages/admin/composer/calendar';
 import ComposerContact from './pages/admin/composer/contact';
+import Contact from './pages/contact';
 
 import Login from './pages/admin/Login';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -48,6 +49,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <Route path="works" element={<ComposerWorks />} />
   <Route path="calendar" element={<ComposerCalendar />} />
   <Route path="contact" element={<ComposerContact />} />
+  <Route path="/contact" element={<Contact />} />
 </Route>
             <Route path="/cruxworks" element={<CruxWorks />} />
             <Route path="/fresnocomposersociety" element={<FresnoComposersSociety />} />
