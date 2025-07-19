@@ -28,6 +28,9 @@ export default function ComposerContact() {
               <h3 className="font-bold">{s.name} &lt;{s.email}&gt;</h3>
               {s.subject && <p className="italic">Subject: {s.subject}</p>}
               <p className="mt-2 whitespace-pre-wrap">{s.message}</p>
+<p className="text-sm mt-2">
+  <a href={`mailto:${s.email}`} className="underline text-blue-600">Reply via Email</a>
+</p>
             </li>
           ))}
         </ul>
