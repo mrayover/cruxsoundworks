@@ -83,6 +83,12 @@ useEffect(() => {
     <p>Offering private lessons in guitar, composition, and music theory.</p>
     <p>Available for all skill levels, in-person and online.</p>
     <p>Click 'Lessons' above to learn more and book a session.</p>
+      <a
+      href="/lessons"
+      className="inline-block mt-4 text-blue-400 hover:text-blue-300 underline font-medium"
+    >
+      Go to Portal
+    </a>
   </div>
 )}
     </div>
