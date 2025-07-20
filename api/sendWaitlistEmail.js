@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
   try {
     await resend.emails.send({
-      from: 'CruxSoundworks Lessons <no-reply@cruxsoundworks.com>',
+      from: 'CruxSoundworks Lessons <info@cruxsoundworks.com>',
       to: 'lessons@cruxsoundworks.com',
       subject: 'New Lessons Waitlist Signup',
       html: `
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
       `,
     });
 
-    
+
     return res.status(200).json({ success: true });
   } catch (err) {
     console.error('Email send failed:', err);
