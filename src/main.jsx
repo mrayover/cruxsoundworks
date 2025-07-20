@@ -23,6 +23,7 @@ import CruxWorks from './pages/cruxworks/index';
 import FresnoComposersSociety from './pages/fresnocomposerssociety/index';
 
 import { AuthProvider } from './context/AuthContext'; // 🛠️ THIS was missing
+import LessonsLanding from './pages/lessons/index';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -30,6 +31,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Router>
         <Layout>
           <Routes>
+            <Route path="/lessons" element={<LessonsLanding />} />
             <Route path="/" element={<App />} />
             <Route path="/works" element={<WorksIndex />} />
             <Route path="/works/:slug" element={<WorkDetail />} />
@@ -43,6 +45,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ProtectedRoute>
       <ComposerAdminWrapper />
     </ProtectedRoute>
+    
   }
 >
   <Route index element={<Navigate to="works" />} />
