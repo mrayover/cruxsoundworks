@@ -6,7 +6,7 @@ export default function LessonsLanding() {
   return (
     <div className="min-h-screen bg-neutral-950 text-white flex flex-col items-center justify-center relative px-4">
       <Link to="/" className="absolute top-4 left-4">
-        <img src="/discretus-glyph.png" alt="Discretus Glyph" className="h-10 w-10 opacity-80 hover:opacity-100 transition-opacity" />
+        <img src="/discretus-glyph.png" alt="Discretus Glyph" className="h-12 w-10 opacity-80 hover:opacity-100 transition-opacity" />
       </Link>
 
       <div className="text-center max-w-2xl">
