@@ -38,10 +38,27 @@ export default function LessonsLanding() {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true); // Future Supabase or email handler here
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const res = await fetch('/api/sendWaitlistEmail', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+
+    if (res.ok) {
+      setSubmitted(true);
+    } else {
+      alert('Failed to submit. Please try again later.');
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Error submitting form.');
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gray-100 text-black flex flex-col items-center justify-center relative px-4 py-12">
