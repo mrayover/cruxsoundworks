@@ -21,46 +21,56 @@ import AdminIndex from './pages/admin/AdminIndex';
 
 import CruxWorks from './pages/cruxworks/index';
 import FresnoComposersSociety from './pages/fresnocomposerssociety/index';
-
-import { AuthProvider } from './context/AuthContext'; // 🛠️ THIS was missing
 import LessonsLanding from './pages/lessons/index';
+
+import { AuthProvider } from './context/AuthContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider> {/* ✅ This is the key difference */}
+    <AuthProvider>
       <Router>
-        <Layout>
-          <Routes>
-            <Route path="/lessons" element={<LessonsLanding />} />
-            <Route path="/" element={<App />} />
-            <Route path="/works" element={<WorksIndex />} />
-            <Route path="/works/:slug" element={<WorkDetail />} />
-            <Route path="/calendar" element={<Calendar />} />
-            <Route path="/admin/add-work" element={<AdminAddWork />} />
-            <Route path="/admin" element={<AdminIndex />} />
-            <Route path="/admin/composer/login" element={<Login />} />
-<Route
-  path="/admin/composer"
-  element={
-    <ProtectedRoute>
-      <ComposerAdminWrapper />
-    </ProtectedRoute>
-    
-  }
->
-  <Route index element={<Navigate to="works" />} />
-  <Route path="works" element={<ComposerWorks />} />
-  <Route path="calendar" element={<ComposerCalendar />} />
-  <Route path="contact" element={<ComposerContact />} />
+        <Routes>
+          {/* Standalone routes without Layout */}
+          <Route path="/lessons" element={<LessonsLanding />} />
+          <Route path="/cruxworks" element={<CruxWorks />} />
+          <Route path="/fresnocomposersociety" element={<FresnoComposersSociety />} />
 
-</Route>
-            <Route path="/cruxworks" element={<CruxWorks />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/fresnocomposersociety" element={<FresnoComposersSociety />} />
-            <Route path="/fresno" element={<Navigate to="/fresnocomposersociety" />} />
-            <Route path="/fcs" element={<Navigate to="/fresnocomposersociety" />} />
-          </Routes>
-        </Layout>
+          {/* Redirect aliases */}
+          <Route path="/fresno" element={<Navigate to="/fresnocomposersociety" />} />
+          <Route path="/fcs" element={<Navigate to="/fresnocomposersociety" />} />
+
+          {/* Everything else with Layout */}
+          <Route
+            path="*"
+            element={
+              <Layout>
+                <Routes>
+                  <Route path="/" element={<App />} />
+                  <Route path="/works" element={<WorksIndex />} />
+                  <Route path="/works/:slug" element={<WorkDetail />} />
+                  <Route path="/calendar" element={<Calendar />} />
+                  <Route path="/admin/add-work" element={<AdminAddWork />} />
+                  <Route path="/admin" element={<AdminIndex />} />
+                  <Route path="/admin/composer/login" element={<Login />} />
+                  <Route
+                    path="/admin/composer"
+                    element={
+                      <ProtectedRoute>
+                        <ComposerAdminWrapper />
+                      </ProtectedRoute>
+                    }
+                  >
+                    <Route index element={<Navigate to="works" />} />
+                    <Route path="works" element={<ComposerWorks />} />
+                    <Route path="calendar" element={<ComposerCalendar />} />
+                    <Route path="contact" element={<ComposerContact />} />
+                  </Route>
+                  <Route path="/contact" element={<Contact />} />
+                </Routes>
+              </Layout>
+            }
+          />
+        </Routes>
       </Router>
     </AuthProvider>
   </React.StrictMode>
