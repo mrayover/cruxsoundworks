@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
   try {
     await resend.emails.send({
-      from: 'CruxSoundworks Lessons <info@cruxsoundworks.com>',
+      from: 'CruxSoundworks Lessons <lessons@cruxsoundworks.com>',
       to: 'lessons@cruxsoundworks.com',
       subject: 'New Lessons Waitlist Signup',
       html: `
