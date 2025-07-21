@@ -22,6 +22,8 @@ import AdminIndex from './pages/admin/AdminIndex';
 import CruxWorks from './pages/cruxworks/index';
 import FresnoComposersSociety from './pages/fresnocomposerssociety/index';
 import LessonsLanding from './pages/lessons/index';
+import LessonsAdmin from './pages/admin/lessons/index';
+
 
 import { AuthProvider } from './context/AuthContext';
 
@@ -60,6 +62,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                       </ProtectedRoute>
                     }
                   >
+                    <Route path="/admin/lessons" element={<LessonsAdmin />} />
                     <Route index element={<Navigate to="works" />} />
                     <Route path="works" element={<ComposerWorks />} />
                     <Route path="calendar" element={<ComposerCalendar />} />

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { supabase } from '../../supabase';
 
 export default function LessonsLanding() {
   const [submitted, setSubmitted] = useState(false);
@@ -47,7 +48,15 @@ const handleSubmit = async (e) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
     });
-
+await supabase.from('lessons_waitlist').insert([
+  {
+    name: formData.name,
+    email: formData.email,
+    experience: formData.experience,
+    styles: formData.styles,            // ✅ this is correct
+    other_style: formData.other         // ✅ also correct
+  }
+]);
     if (res.ok) {
       setSubmitted(true);
     } else {
