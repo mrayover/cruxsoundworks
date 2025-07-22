@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../../supabase';
 import { useLessonsAuth } from '../../../context/LessonsAuthContext';
 
@@ -6,6 +7,11 @@ export default function LessonsAdmin() {
   const { user } = useLessonsAuth();
   const [entries, setEntries] = useState([]);
 
+const navigate = useNavigate();
+const handleLogout = async () => {
+  await supabase.auth.signOut();
+  navigate('/admin/lessons/login');
+};
 useEffect(() => {
     if (!user) return;
     const fetchData = async () => {
@@ -30,7 +36,15 @@ useEffect(() => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto py-10 px-4">
+    
+    <div className="max-w-4xl mx-auto py-10 px-4 relative">
+      <button
+  onClick={handleLogout}
+  className="absolute top-0 right-0 mt-2 mr-2 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+>
+  Sign Out
+</button>
+
       <h1 className="text-3xl font-serif mb-6">🎓 Lessons Waitlist Submissions</h1>
       {entries.length === 0 ? (
         <p className="text-gray-500">No submissions yet.</p>

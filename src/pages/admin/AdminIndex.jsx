@@ -13,12 +13,13 @@ export default function AdminIndex() {
         >
           🎼 Composer Dashboard
         </button>
-        <button
-          onClick={() => navigate('/admin/lessons')}
-          className="w-full bg-blue-700 text-white px-6 py-3 rounded hover:bg-blue-800 transition"
-        >
-          🎓 Lessons Admin (Coming Soon)
-        </button>
+<button
+  onClick={() => navigate('/admin/lessons/login')}
+  className="w-full bg-blue-700 text-white px-6 py-3 rounded hover:bg-blue-800 transition"
+>
+  🎓 Lessons Admin Login
+</button>
+
       </div>
     </div>
   );
