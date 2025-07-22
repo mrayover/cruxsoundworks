@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../../supabase';
+import { useLessonsAuth } from '../../../context/LessonsAuthContext';
 
 export default function LessonsAdmin() {
+  const { user } = useLessonsAuth();
   const [entries, setEntries] = useState([]);
 
-  useEffect(() => {
+useEffect(() => {
+    if (!user) return;
     const fetchData = async () => {
       const { data, error } = await supabase
         .from('lessons_waitlist')
@@ -16,7 +19,15 @@ export default function LessonsAdmin() {
     };
 
     fetchData();
-  }, []);
+  }, [user]);
+
+  if (!user) {
+    return (
+      <div className="py-20 text-center text-gray-600">
+        <p>You must be logged in to view this page.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto py-10 px-4">

@@ -23,13 +23,16 @@ import CruxWorks from './pages/cruxworks/index';
 import FresnoComposersSociety from './pages/fresnocomposerssociety/index';
 import LessonsLanding from './pages/lessons/index';
 import LessonsAdmin from './pages/admin/lessons/index';
-
+import { LessonsAuthProvider } from './context/LessonsAuthContext'
 
 import { AuthProvider } from './context/AuthContext';
+import LessonsLogin from './pages/admin/lessons/login';
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
+      <LessonsAuthProvider>
       <Router>
         <Routes>
           {/* Standalone routes without Layout */}
@@ -54,6 +57,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                   <Route path="/admin/add-work" element={<AdminAddWork />} />
                   <Route path="/admin" element={<AdminIndex />} />
                   <Route path="/admin/composer/login" element={<Login />} />
+                  <Route path="/admin/lessons/login" element={<LessonsLogin />} />
+                  <Route path="/admin/lessons" element={<LessonsAdmin />} />
                   <Route
                     path="/admin/composer"
                     element={
@@ -62,8 +67,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                       </ProtectedRoute>
                     }
                   >
-                    <Route path="/admin/lessons" element={<LessonsAdmin />} />
-                    <Route index element={<Navigate to="works" />} />
+                   <Route index element={<Navigate to="works" />} />
                     <Route path="works" element={<ComposerWorks />} />
                     <Route path="calendar" element={<ComposerCalendar />} />
                     <Route path="contact" element={<ComposerContact />} />
@@ -75,6 +79,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           />
         </Routes>
       </Router>
+      </LessonsAuthProvider>
     </AuthProvider>
   </React.StrictMode>
 );
