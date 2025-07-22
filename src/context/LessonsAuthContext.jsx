@@ -1,28 +1,30 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { auth } from '../firebase';
-import { onAuthStateChanged } from 'firebase/auth';
+import { supabase } from '../supabase';
 
-const AuthContext = createContext();
+const LessonsAuthContext = createContext();
 
-export function useAuth() {
-  return useContext(AuthContext);
-}
-
-export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+export const LessonsAuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, user => {
-      setCurrentUser(user);
-      setLoading(false);
+    const init = async () => {
+      const { data: sessionData } = await supabase.auth.getSession();
+      setUser(sessionData.session?.user ?? null);
+    };
+    init();
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
     });
-    return unsubscribe;
+
+    return () => listener?.subscription.unsubscribe();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ currentUser }}>
-      {!loading && children}
-    </AuthContext.Provider>
+    <LessonsAuthContext.Provider value={{ user }}>
+      {children}
+    </LessonsAuthContext.Provider>
   );
-}
+};
+
+export const useLessonsAuth = () => useContext(LessonsAuthContext);
