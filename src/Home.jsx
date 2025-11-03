@@ -1,20 +1,30 @@
+// src/Home.jsx
 import React from 'react';
 
 const Home = () => {
   return (
-    <div className="flex flex-col items-center justify-center text-center mt-20 space-y-4">
-      <h1 className="text-xl uppercase tracking-widest">Welcome to</h1>
-      <img
-      src="/crux-logo.png"
-      alt="Crux Soundworks Logo"
-      className="h-36 drop-shadow-xl"/>
+    <main className="min-h-[80vh] flex items-center justify-center px-4">
+      <section className="max-w-3xl w-full text-center space-y-8">
+        {/* Logo card */}
+        <div className="inline-flex flex-col items-center justify-center px-10 py-8 bg-neutral-50/80 shadow-xl rounded-3xl border border-neutral-200">
+          <img
+            src="/crux-logo.png"
+            alt="Crux Soundworks logo"
+            className="max-h-40 w-auto"
+          />
+        </div>
 
-    <div className="h-15" />
-
-<p className="mt-6 text-xl italic">
-  Composer & Guitarist — Crux Soundworks
-</p>
-    </div>
+        {/* Text stack */}
+        <div className="space-y-2">
+          <h1 className="text-2xl md:text-3xl tracking-[0.35em] uppercase text-neutral-800">
+            Composer &amp; Guitarist
+          </h1>
+          <p className="text-base md:text-lg italic text-neutral-600">
+            The Pattern Beneath the Noise
+          </p>
+        </div>
+      </section>
+    </main>
   );
 };
 
