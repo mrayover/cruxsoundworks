@@ -15,12 +15,12 @@ const Home = () => {
         </div>
 
         {/* Text stack */}
-        <div className="space-y-2">
-          <h1 className="text-2xl md:text-3xl tracking-[0.35em] uppercase text-neutral-800">
-            Composer &amp; Guitarist
+        <div className="space-y-1">
+          <h1 className="text-2xl md:text-3xl font-light tracking-widest text-neutral-800">
+            Marcus Overacker
           </h1>
-          <p className="text-base md:text-lg italic text-neutral-600">
-            The Pattern Beneath the Noise
+          <p className="text-lg md:text-xl uppercase tracking-[0.35em] text-neutral-700">
+            Composer &amp; Guitarist
           </p>
         </div>
       </section>
