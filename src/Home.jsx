@@ -11,9 +11,9 @@ const Home = () => {
 
     <div className="h-15" />
 
-      <p className="mt-6 text-xl italic">
-        The Pattern Beneath the Noise
-    </p>
+<p className="mt-6 text-xl italic">
+  Composer & Guitarist — Crux Soundworks
+</p>
     </div>
   );
 };
